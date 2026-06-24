@@ -48,6 +48,20 @@
 
 
 
+fruits = ["mango", "apple", "pear"]
+def enumerate_old_way():
+    i = 0
+    for fruit in fruits:
+        print(i, fruit)
+        i = i + 1
+
+enumerate_old_way()
+
+def enumerate_new_way():
+    for i, fruit in enumerate(fruits):
+        print(i, fruit)
+
+enumerate_new_way()
 
 
 
