@@ -4,6 +4,23 @@
 #
 # Given two price lists (before and after discount), find the absolute difference for each item:
 # ```python
+# Without guard — silent wrong answer
+# zip([1, 2, 3], [1, 2])  # silently ignores 3
+#
+# # With guard — honest error, immediately visible
+# if len(lst1) != len(lst2):
+#     raise ValueError("Lists must be same length")
+#
+# A
+# professional
+# never
+# lets
+# bad
+# data
+# pass
+# silently.He
+# speaks. 💎
+
 before = [100, 45, 230, 18, 75]
 after  = [85,  45, 199, 20, 60]
 # ```
@@ -15,6 +32,26 @@ def find_difference(lst1, lst2):
 
     if not lst2:
         raise ValueError("The list2 is empty")
+
+    if len(lst1) != len(lst2):
+        raise ValueError("Lists must be same length")
+
+    # One
+    # small
+    # professional
+    # note
+    # for the future:
+    #     if len(lst1) != len(lst2):
+    #         raise ValueError("Lists must be same length")
+    # zip
+    # silently
+    # stops
+    # at
+    # the
+    # shorter
+    # list.Worth
+    # guarding.But
+    # for this exercise — excellent.
 
     for b, a in zip(lst1, lst2):
         print(f"The difference between {b} and {a} is : {abs(b - a)}")
@@ -53,6 +90,14 @@ min_age = min(participants, key=lambda p: p["age"])
 print(min_age)
 max_age = max(participants, key=lambda p: p["age"])
 print(max_age)
+# One
+# small
+# refinement — print
+# name and age, not the
+# full
+# dict:
+print(f"Youngest: {min_age['name']}, {min_age['age']}")
+print(f"Oldest:   {max_age['name']}, {max_age['age']}")
 
 # **Exercise 4 — The Clamp**
 #
@@ -67,6 +112,7 @@ print(max_age)
 # clamp(150, 0, 100)   # 100
 # ```
 # *(Use `max` and `min` — no `if` statements needed.)* 🌿
+
 
 
 
