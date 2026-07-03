@@ -113,6 +113,55 @@ print(f"Oldest:   {max_age['name']}, {max_age['age']}")
 # ```
 # *(Use `max` and `min` — no `if` statements needed.)* 🌿
 
+def clamp(value, low, high):
+    return max(low, min(high, value))
+
+print(clamp(50, 0, 100))    # 50
+print(clamp(-5, 0, 100))    # 0
+print(clamp(150, 0, 100))   # 100
+
+# **Exercise 5 — Temperature Report**
+#
+# ```python
+temps = [18.4, 22.7, 15.1, 30.9, 19.3, 25.6, 12.8]
+target = 20.0
+
+print(f"Lowest:          {min(temps):.1f}°")
+print(f"Highest:         {max(temps):.1f}°")
+print(f"Average:         {round(sum(temps) / len(temps), 1):.1f}°")
+
+closest = min(temps, key=lambda t: abs(t - target))
+print(f"Closest to 20°:  {closest:.1f}°")
+
+# ```
+# Print a complete report:
+# ```
+# Lowest:   12.8°
+# Highest:  30.9°
+# Average:  20.7°   (rounded to 1 decimal)
+# Closest to 20°:  19.3°  (use min with key=abs and a lambda)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
