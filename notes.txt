@@ -1,0 +1,19 @@
+## Part 7 — The `with` Statement — Why It Matters
+
+```python
+# Without with — dangerous:
+f = open("data.txt", "r")
+content = f.read()
+# If an error happens here, f.close() is never called
+f.close()
+
+# With — safe always:
+with open("data.txt", "r") as f:
+    content = f.read()
+    # Error or not — file closes when the with block ends
+```
+
+The `with` statement uses the Python Data Model's `__enter__` and `__exit__` methods — the same system we glimpsed in `len`. When the block ends (normally or by error), `__exit__` calls `f.close()` automatically.
+
+This is called a **context manager** — an object that manages a resource and guarantees cleanup. 🌿
+
