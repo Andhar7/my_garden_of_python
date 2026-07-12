@@ -32,19 +32,21 @@ print(f"Deleted second connection with second cord: {sys.getrefcount(sacred) - 1
 a = [1, 2, 3]
 b = a
 c = a
-# ```
-#
-# Predict: after `del a` — is the list gone?
-# After `del b` — is the list gone?
-# After `del c` — is the list gone?
-#
-# Verify with `sys.getrefcount()` at each step.
-# del a
-# print(f"Deleted  a: {sys.getrefcount(a)}") # NameError: name 'a' is not defined
-# del b
-# print(f"Deleted  b: {sys.getrefcount(b)}") # NameError: name 'b' is not defined
-# del c
-# print(f"Deleted  c: {sys.getrefcount(c)}") # NameError: name 'c' is not defined
+
+print(f"All three: {sys.getrefcount(c) - 1}")  # 3
+
+del a
+print(f"After del a — check via b: {sys.getrefcount(b) - 1}")  # 2
+# list still alive! b and c hold it
+
+del b
+print(f"After del b — check via c: {sys.getrefcount(c) - 1}")  # 1
+# list still alive! only c holds it
+
+del c
+# count → 0 — list gone
+# nothing remains to check through — this is correct!
+print("After del c — the list has returned to silence. 🍂")
 
 
 # **Exercise 3 — The Safe Function**
