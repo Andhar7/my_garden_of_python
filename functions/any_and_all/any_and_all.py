@@ -14,7 +14,7 @@ def any_world(iterable):
 # Inner World of all ...
 def all_world(iterable):
     for item in iterable:
-        if item:
+        if not item:
             return False
     return True
 
