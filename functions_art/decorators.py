@@ -359,6 +359,80 @@ say("Om")
 # `@repeat(times=3)` means: call `repeat(times=3)` first (returns `decorator`),
 # then apply that decorator to `say`. 🌺
 
+## Part 8 — Built-in Decorators · A First Glimpse
+
+# Python provides several decorators out of the box. We meet them briefly here —
+# full depth comes in Part 5 (OOP).
+
+### `@property` — Turn a Method Into an Attribute
+class Circle:
+    
+    def __init__(self, radius):
+        self.radius = radius
+    
+    @property
+    def area(self):
+        return 3.14159 * self.radius ** 2
+
+c = Circle(7)
+print(c.area)
+
+#`@property` lets you compute values on access — without `()`. Clean API. 🌿
+
+
+### `@staticmethod` and `@classmethod`
+class MathHelper:
+    @staticmethod
+    def is_even(n):
+        return n % 2 == 0
+
+    @classmethod
+    def create_zero(cls):
+        return cls(0)
+
+print(MathHelper.is_even(4))   # True  ← no instance needed
+
+
+### `@functools.lru_cache` — Automatic Memoisation
+
+import functools
+
+@functools.lru_cache(maxsize=128)
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+
+print(fibonacci(50))   # instant — results cached automatically
+
+# `lru_cache` is the production-ready version of the cache we built in closures.
+# LRU = Least Recently Used — it keeps the 128 most recent results and discards old ones.
+
+# This is one of the most practically useful decorators in Python. 🌿
+
+
+# from django.contrib.auth.decorators import login_required
+# from django.views.decorators.http   import require_POST
+
+# @login_required
+# @require_POST
+# def submit_form(request):
+    # This view only runs if:
+    # 1. The user is logged in (@login_required)
+    # 2. The request method is POST (@require_POST)
+    # Both checked before our code even starts
+    # ...
+
+
+# Every Django view you will ever write may carry decorators.
+# Now you understand exactly what they do — and you could write them yourself. 🙏
+
+
+
+
+
+
 
 
 
