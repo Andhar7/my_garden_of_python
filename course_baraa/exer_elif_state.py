@@ -70,7 +70,7 @@ if valid:
 # Must not contain any spaces
 # Must start and end with a letter or digit
 
-password = "dsdsQ"
+password = "sasaHdsdsQdssd"
 password = password.strip()
 
 valid = True
