@@ -95,4 +95,80 @@ for even in even_check:
         break
 else:
     print("All numbers are odd!")
+    
+
+names = ['Kamara', 'Andrej', 'Tatjana', None, 'Kumar']
+for name in names:
+    if name is None:
+        print("Found a missing name")
+        break
+else:
+    print("All names are available!")
+
+files = [
+    'data.csv',
+    'merge.pdf',
+    'follow.txt',
+    'beyound.csv',
+]
+for file in files:
+    if not file.endswith('csv'):
+        print(f"We found files which not include .csv : {file}")
+        continue 
+
+for file in files:
+    if not file.endswith('csv'):
+        print("Not all files with .csv")
+        break
+else:
+    print("All files in csv")
+    
+print("===  ===")
+# Challenge
+file_list = [
+    'report.csv',
+    'merge.xlsx',
+    'merge.xlsx',
+    'merge.xlsx',
+    'follow.docs',
+    'follow.docs',
+    'beyound.csv',
+    'report.csv'
+]
+  # Solution 2
+print("=== Solution 2 ===")
+
+seen = set()
+for file in file_list:
+    if file_list.count(file) > 1 and file not in seen:
+        print(f"Duplicate files here: {file}")
+        seen.add(file)
+        
+# Professional way using counter
+  # Solution 3
+print("\n=== Solution 3 (Professional) ===")
+
+from collections import Counter
+counts = Counter(file_list)
+
+for file, count in counts.items():
+    if count > 1:
+        print(f"Duplicate {file} appears {count} times...")
+
+
+print("\n=== Solution (Professional Way) ===")
+# Challenge. Find the file that appeared most
+most_common_file, most_common_count = counts.most_common(1)[0]
+print(f"Most duplicated files: {most_common_file} {most_common_count} times")
+
+# Challenge: Find all files appearing more then 2 times
+print("\n Files appearing more then 2 times...")
+for file, count in counts.items():
+    if count > 2:
+        print(f"File : {file} count : {count} times")
+
+
+
+        
+        
 
