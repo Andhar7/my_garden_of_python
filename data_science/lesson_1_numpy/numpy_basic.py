@@ -1,9 +1,12 @@
-#import numpy as np
 
-try:
-    import numpy as np  # pyright: ignore[reportMissingImports]
-except ImportError:
-    numpy = None
+
+
+import numpy as np
+
+# try:
+#     import numpy as np  # pyright: ignore[reportMissingImports]
+# except ImportError:
+#     numpy = None
 
 # Challenge 1: Create arrays
 print("====== Challenge 1: Create Arrays ======")
