@@ -13,6 +13,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+# try:
+#     import numpy as np  # pyright: ignore[reportMissingImports]
+# except ImportError:
+#     numpy = None
+
 # ============================================================================
 # PART 1: THE CORE CONCEPT — Figure and Axes
 # ============================================================================
@@ -34,18 +39,23 @@ print("-" * 70)
 
 # Create figure and axes (the canvas and drawing area)
 fig, ax = plt.subplots()
+print(fig, ax)
 
 # Data
-x = [1, 2, 3, 4, 5]
-y = [2, 4, 6, 8, 10]
+x = [122, 233, 333, 433, 5333]
+y = [23, 43, 65, 85, 105]
 
 # Plot (draw on the axes)
-ax.plot(x, y)
+result_ax = ax.plot(x, y)
+print(f"Result_ax: {result_ax}")
 
 # Labels (tell the story)
-ax.set_xlabel("Time (days)")
-ax.set_ylabel("Growth (units)")
-ax.set_title("Simple Linear Growth")
+time = ax.set_xlabel("Time (days)")
+grow = ax.set_ylabel("Growth (units)")
+linear = ax.set_title("Simple Linear Growth")
+print(time)
+print(grow)
+print(linear)
 
 # Save instead of showing (for learning purposes)
 plt.savefig('/Users/andhar/desktop/my_garden_of_python/data_science/lesson_3_visualization/plot_1_simple.png')
