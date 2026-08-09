@@ -120,3 +120,52 @@ print("=" * 70)
 #    - Average salary by department (bar plot)
 #    - Employee satisfaction by department (violin plot)
 
+fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+
+#    - Average salary by department (bar plot)
+sns.barplot(data=employee_data, x='Department', y='Salary', ax=axes[0])
+axes[0].set_title("Average Salary by Department", fontsize=14, fontweight='bold')
+axes[0].set_xlabel("Department", fontsize=12)
+axes[0].set_ylabel("Salary ($)", fontsize=12)
+
+#    - Employee satisfaction by department (violin plot)
+sns.violinplot(data=employee_data, x='Department', y='Satisfaction', ax=axes[1])
+axes[1].set_title("Employee satisfaction by department", fontsize=14, fontweight='bold')
+axes[1].set_xlabel("Department", fontsize=12)
+axes[1].set_ylabel("Satisfaction", fontsize=12)
+
+plt.tight_layout()
+plt.savefig('/Users/andhar/desktop/my_garden_of_python/data_science/lesson_3_visualization/challenge_2_categorical.png',
+            dpi=300, bbox_inches='tight')
+plt.close()
+
+# 4. Create correlation matrix:
+#    - Heatmap showing correlations between: Salary, Performance_Score, Years_Experience, Satisfaction
+#    - Add annotations showing correlation values
+  # ============================================================================
+  # GROUP 4: CORRELATION MATRIX
+  # ============================================================================
+print("=" * 70)
+print("GROUP 4: CORRELATION MATRIX")
+print("=" * 70)
+
+# numeric_data = pd.DataFrame(employee_data)
+numeric_data = employee_data[['Salary', 'Performance_Score', 'Years_Experience', 'Satisfaction']]
+
+
+fig, ax = plt.subplots(figsize=(8,6))
+
+# Calculate correlation
+correlation = numeric_data.corr()
+
+# Create heatmap
+sns.heatmap(correlation, annot=True, fmt='.2f', cmap='coolwarm',
+            center=0, ax=ax, cbar_kws={'label':'Correlation'})
+
+ax.set_title("Correlation matrix between data", fontweight='bold')
+
+
+plt.tight_layout()
+plt.savefig('/Users/andhar/desktop/my_garden_of_python/data_science/lesson_3_visualization/challenge_2_correlation.png',
+            dpi=300, bbox_inches='tight')
+plt.close()
