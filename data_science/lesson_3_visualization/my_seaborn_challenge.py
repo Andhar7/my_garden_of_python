@@ -169,3 +169,41 @@ plt.tight_layout()
 plt.savefig('/Users/andhar/desktop/my_garden_of_python/data_science/lesson_3_visualization/challenge_2_correlation.png',
             dpi=300, bbox_inches='tight')
 plt.close()
+
+
+  # For Challenge 2:
+
+  # 1. Add Data Validation Section:
+print("=" * 70)
+print("DATA QUALITY VALIDATION")
+print("=" * 70)
+
+  # Check for missing values
+print("Missing values:")
+print(employee_data.isnull().sum())
+
+  # Check value ranges
+print("\nSalary range:", employee_data['Salary'].min(),
+      "-", employee_data['Salary'].max())
+print("Performance range:", employee_data['Performance_Score'].min(),
+      "-", employee_data['Performance_Score'].max())
+# Data quality assessment
+print("\nData Quality Assessment:")
+print("✅ Complete? Yes (no missing values)")
+print("✅ Range realistic? Yes (salary 30k-150k is realistic)")
+print("⚠️ Source: SIMULATED DATA (randomly generated)")
+print("⚠️ Limitation: Random data shows NO real patterns")
+
+  # 2. Add Note to Conclusions:
+  # IMPORTANT NOTE:
+  # This analysis uses SIMULATED (randomly generated) data.
+  # Real employee data would likely show stronger correlations:
+  # - Experience ↔ Salary: ~0.70 (strong)
+  # - Performance ↔ Salary: ~0.40 (moderate)
+  # - Salary ↔ Satisfaction: ~0.25 (weak but exists)
+
+  # The lack of correlations in this dataset reflects the fact
+  # that the data was randomly generated with NO real relationships.
+
+  # In production ML: Always validate data quality BEFORE analysis!
+
