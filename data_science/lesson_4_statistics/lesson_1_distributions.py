@@ -31,3 +31,37 @@ plt.savefig('/Users/andhar/desktop/my_garden_of_python/data_science/lesson_4_sta
 plt.close()
 
 print("\nVisualization saved!")
+
+# NUMBER : 1
+# Mean (Average)
+# Sum all values, divide by count
+print("What is the mean of your generated data?")
+data = [70, 80, 90, 100, 110]
+result_mean = mean = sum(data) / len(data) 
+print("Mean mean sum of data / on len of data: ")
+print(f"Result of mean: {result_mean}")
+# Or with NumPy 
+result_numpy = mean = np.mean(data)
+print(f"Result of mean with numpy: {result_numpy}")
+
+
+# NUMBER : 2
+print("What is the median?")
+# Median (Middle Value)
+# Sort data, take middle value
+data = [70, 80, 90, 100, 110]
+median_result = np.median(data)
+print(f"Here middle of all data: {median_result}")
+# if even count, average of two middle values
+
+
+# NUMBER : 3
+
+
+
+
+
+
+
+
+
