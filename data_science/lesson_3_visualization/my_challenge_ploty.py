@@ -26,6 +26,9 @@ print(f"✅ Students: {students['Student_ID'].nunique()}")
 print(f"✅ Subjects: {students['Subject'].nunique()}")
 print()
 
+# 🔑 SAVE ORIGINAL NUMERIC DATA BEFORE DISPLAY CONVERSION
+attendance_numeric = students['Attendance'].copy()  # Keep for correlation later!
+
 # 2. Interactive Scatter Plot:
 #    - X: Hours_Studied, Y: Score
 #    - Color: Subject
@@ -118,4 +121,52 @@ fig.write_html('/Users/andhar/desktop/my_garden_of_python/data_science/lesson_3_
 #    - Score distribution by subject
 #    - Show outliers
 #    - Title: "Score Distribution (by Subject)"
+fig = px.box(students, x='Subject', y='Score', points='outliers', title='Score Distribution (by Subject)')
 
+fig.write_html('/Users/andhar/desktop/my_garden_of_python/data_science/lesson_3_visualization/my_bar_chart_4.html')
+
+
+# 5. Interactive Heatmap:
+#    - Correlation matrix: Score, Hours_Studied, Attendance
+#    - Color scale: red-white-blue
+#    - Show values
+#    - Title: "Correlation Matrix"
+
+# Create temporary dataframe for correlation (use ORIGINAL numeric Attendance!)
+correlation_data = pd.DataFrame({
+    'Score': students['Score'],
+    'Hours_Studied': students['Hours_Studied'],
+    'Attendance': attendance_numeric  # Use backup, not the string version!
+})
+
+correlation = correlation_data.corr()
+
+fig = px.imshow(correlation,
+                labels=dict(color='Correlation'),
+                color_continuous_scale='RdBu_r',
+                text_auto='.2f',
+                title='Correlation Matrix')
+
+fig.write_html('/Users/andhar/desktop/my_garden_of_python/data_science/lesson_3_visualization/my_bar_chart_5.html')
+
+
+# 6. 3D Scatter Plot (BONUS):
+#    - X: Hours_Studied, Y: Score, Z: Attendance
+#    - Color: Subject
+#    - Rotatable, zoomable
+fig = px.scatter_3d(students, x='Hours_Studied', y='Score', z='Attendance',
+                    color='Subject',
+                    labels={'Hours_Studied': 'Hours',
+                            'Score': 'Score',
+                            'Attendance': 'Attendance %'},
+                    title='3D: Hours vs Score vs Attendance')
+# Add helpful annotation
+fig.add_annotation(
+    text='💡 Drag to rotate • Scroll to zoom • Click legend to filter',
+    xref='paper', yref='paper',
+    x=0.5, y=-0.05,
+    showarrow=False,
+    font=dict(size=11, color='gray')
+)
+fig.update_traces(marker=dict(size=5))
+fig.write_html('/Users/andhar/desktop/my_garden_of_python/data_science/lesson_3_visualization/my_bar_chart_6.html')
