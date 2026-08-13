@@ -81,6 +81,48 @@ result_of_variance = np.var(data) # = std ** 2
 print("What does the bell curve look like?")
 print("Bell curve look like distribution of data...")
 
+# Challenge 2: Prove the 68% rule
+print("=" * 72)
+print("Challenge 2: Prove the 68-95-99.7 Rule")
+print("=" * 72)
+
+mean = np.mean(data)
+std = np.std(data)
+
+# Count how many values fall within 1 standard deviation
+within_1std = np.sum((data >= mean - std) & (data <= mean + std))
+percent_1std = (within_1std / len(data)) * 100
+
+print(f"\nMean: {mean:.2f}")
+print(f"Std Dev: {std:.2f}")
+print(f"\nRange for 1 Std Dev: {mean - std:.2f} to {mean + std:.2f}")
+print(f"Expected within 1 Std Dev: {within_1std} out of {len(data)}")
+print(f"Percentage: {percent_1std:.2f}%")
+print(f"Expected: 68% (theory) vs {percent_1std:.2f}% (actual)")
+
+# Count within 2 standard deviations
+within_2std = np.sum((data >= mean - 2 * std) & (data <= mean + 2 * std))
+percent_2std = (within_2std / len(data)) * 100
+
+print(f"\nRange for 2 Std Dev: {mean - 2 * std:.2f} to {mean + 2 * std:.2f}")
+print(f"Values within 2 Std Dev: {within_2std} out of {len(data)}")
+print(f"Percentage: {percent_2std:.2f}%")
+print(f"Expected: 95% (theory) vs {percent_2std:.2f}% (actual)")
+
+# Count within 3 standard deviations
+within_3std = np.sum((data >= mean - 3 * std) & (data <= mean + 3 * std))
+percent_3std = (within_3std / len(data)) * 100
+
+print(f"\nRange for 3 Std Dev: {mean - 3 * std:.2f} to {mean + 3 * std:.2f}")
+print(f"Values within 3 Std Dev: {within_3std} out of {len(data)}")
+print(f"Percentage: {percent_3std:.2f}%")
+print(f"Expected: 99.7% (theory) vs {percent_3std:.2f}% (actual)")
+print("\nThe 68-95-99.7 rule PROVEN with real data!")
+
+
+
+
+
 
 
 
