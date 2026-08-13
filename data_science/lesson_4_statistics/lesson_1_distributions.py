@@ -46,7 +46,7 @@ print(f"Result of mean with numpy: {result_numpy}")
 
 
 # NUMBER : 2
-print("What is the median?")
+print("\nWhat is the median?")
 # Median (Middle Value)
 # Sort data, take middle value
 data = [70, 80, 90, 100, 110]
@@ -56,6 +56,34 @@ print(f"Here middle of all data: {median_result}")
 
 
 # NUMBER : 3
+# Mode (Most Frequent)
+# The value that appears most offen
+data = [70, 80, 80, 80, 80, 90, 100, 110]
+# Mode  = 80 - (appears 3 times)
+from scipy import stats
+result_of_mode = stats.mode(data, keepdims=True)[0][0]
+print(f"Result of mode: {result_of_mode}") # 80 
+
+# NUMBER : 4
+# Standard Deviation (Spread)
+# How far values spread from the mean
+data = [70, 80, 90, 100, 110]
+result_of_std = np.std(data) # = 14.14
+print(result_of_std) # 14.142135623730951 - it mean that std function has round(2)
+# Higher std = more spread out
+# Lower std = tighter around mean
+
+# NUMBER : 6
+# Variance
+# Standard Deviation squared
+result_of_variance = np.var(data) # = std ** 2
+
+print("What does the bell curve look like?")
+print("Bell curve look like distribution of data...")
+
+
+
+
 
 
 
