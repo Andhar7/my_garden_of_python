@@ -86,8 +86,11 @@ print("=" * 72)
 print("Challenge 2: Prove the 68-95-99.7 Rule")
 print("=" * 72)
 
+data = np.random.normal(loc=100, scale=15, size=10000)
+
 mean = np.mean(data)
 std = np.std(data)
+
 
 # Count how many values fall within 1 standard deviation
 within_1std = np.sum((data >= mean - std) & (data <= mean + std))
@@ -121,11 +124,67 @@ print("\nThe 68-95-99.7 rule PROVEN with real data!")
 
 
 
+  # Understanding the difference
+print("\n" + "="*70)
+print("INSIGHT: Sample Statistics vs Theoretical")
+print("="*70)
+print("\nWHAT WE ASKED FOR (Population Parameters):")
+print("  Location: 100")
+print("  Scale: 15")
+print("\nWHAT WE ACTUALLY GOT (Sample Statistics):")
+print(f"  Sample Mean: {mean:.2f}")
+print(f"  Sample Std: {std:.2f}")
+print("\nTHE DIFFERENCE:")
+print(f"  Mean difference: {100 - mean:.2f}")
+print(f"  Std difference: {15 - std:.2f}")
+print("\nWHY? Random sampling creates natural variation!")
+print("Each run produces slightly different results.")
+print("This is called 'sampling error' — it's NORMAL and EXPECTED!")
 
 
 
+# Run 3 random times
+print("=" * 72)
+print("Run 3 random times")
+print("=" * 72)
+
+print("\n" + "="*70)
+print("RUN THIS CODE MULTIPLE TIMES!")
+print("Each run generates NEW random data")
+print("Watch the sampling error change each time!")
+print("="*70)
+print(f"\nRun at: {np.random.RandomState(None)}")
+print(f"Sample Mean: {mean:.2f} (Expected: 100)")
+print(f"Mean Error: {abs(100 - mean):.2f}")
+print(f"\nSample Std: {std:.2f} (Expected: 15)")
+print(f"Std Error: {abs(15 - std):.2f}")
+print("\n💡 KEY INSIGHT:")
+print("Each run produces DIFFERENT sampling error!")
+print("This variation is EXPECTED and NORMAL!")
 
 
+  # Visualize the 68-95-99.7 Rule on your actual data
+plt.figure(figsize=(12, 6))
+# Plot histogram
+plt.hist(data, bins=50, density=True, alpha=0.6, color='blue', label='Data')
+# Plot theoretical normal curve
+x = np.linspace(data.min(), data.max(), 100)
+theoretical_dist = stats.norm.pdf(x, mean, std)
+plt.plot(x, theoretical_dist, 'r-', linewidth=2, label='Theoretical Normal')
+# Add vertical lines for standard deviations
+plt.axvline(mean, color='green', linestyle='--', linewidth=2, label='Mean')
+plt.axvline(mean - std, color='orange', linestyle=':', linewidth=2, label='±1 Std Dev')
+plt.axvline(mean + std, color='orange', linestyle=':', linewidth=2)
+plt.axvline(mean - 2*std, color='purple', linestyle=':', linewidth=2, label='±2 Std Dev')
+plt.axvline(mean + 2*std, color='purple', linestyle=':', linewidth=2)
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.title('Normal Distribution: Theory vs Reality (10,000 Samples)')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.savefig('/Users/andhar/desktop/my_garden_of_python/data_science/lesson_4_statistics/dist_2_theory_vs_reality.png', dpi=150)
+plt.close()
+print("✅ Beautiful visualization saved!")
 
 
 
