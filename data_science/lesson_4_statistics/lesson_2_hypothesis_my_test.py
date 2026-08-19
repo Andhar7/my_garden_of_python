@@ -14,8 +14,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 
-from data_science.lesson_4_statistics.lesson_2_hypothesis_testing import drug_group
-
 print("\n" + "=" * 81)
 print("Checkpoint 2.3.2 : Hypothesis Testing & P-Values" )
 print("=" * 81)
