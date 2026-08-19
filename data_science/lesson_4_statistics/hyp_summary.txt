@@ -1,0 +1,25 @@
+
+🎯 WHAT YOU LEARNED:
+
+1. ✅ Null Hypothesis (H₀): Assume nothing happened
+2. ✅ Alternative Hypothesis (H₁): We want to prove something happened
+3. ✅ P-Value: Probability of the data IF null is true
+4. ✅ Statistical Significance: p < 0.05 means result is real
+5. ✅ Effect Size (Cohen's d): How big is the actual difference?
+6. ✅ Type I & II Errors: False positives and false negatives
+
+---
+
+📊 YOUR TEST RESULTS:
+   T-Statistic: 1.9414
+   P-Value: 0.055088
+   Cohen's d: 0.3883
+
+   Conclusion: ❌ Not proven
+
+---
+
+🔥 NEXT CHECKPOINT:
+   Correlation & Causation
+   - Can we say drug CAUSED the improvement?
+   - Or was it just correlation?

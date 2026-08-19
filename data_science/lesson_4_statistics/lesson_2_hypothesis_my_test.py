@@ -201,8 +201,16 @@ plt.title('Drug vs Placebo: Box Plot Comparison')
 plt.grid(True, alpha=0.3)
 
 # Plot 2: Distributions with means
-# plt.subplot(1, 2, 2)
-
+plt.subplot(1, 2, 2)
+plt.hist(drug_group, bins=15, alpha=0.6, label='Drug', color='green', edgecolor='red')
+plt.hist(placebo_group, bins=15, alpha=0.6, label='Placebo', color='blue', edgecolor='yellow')
+plt.axvline(np.mean(drug_group), color='green', linestyle='--', linewidth=2, label=f'Drug Mean: {np.mean(drug_group):.2f}')
+plt.axvline(np.mean(placebo_group), color='blue', linestyle='--', linewidth=2, label=f'Placebo Mean: {np.mean(placebo_group):.2f}')
+plt.xlabel('Mood Improvement Score')
+plt.ylabel('Frequency')
+plt.title('Distribution Comparison')
+plt.legend()
+plt.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.savefig('/Users/andhar/desktop/my_garden_of_python/data_science/lesson_4_statistics/hyp_1_ttest.png', dpi=150)
@@ -210,18 +218,167 @@ print("✅ Visualization saved: hyp_1_ttest.png")
 plt.close()
 
 
+# ============================================================================
+# PART 8: UNDERSTANDING EFFECT SIZE
+# ============================================================================
+
+print("\n" + "=" * 81)
+print("PART 8: Effect Size (Cohen's d - Practical Significance)")
+print("=" * 81)
+
+print("""
+P-VALUE tells us: "Is the difference REAL?" (Statistical Significance)
+EFFECT SIZE tells us: "How BIG is the difference?" (Practical Significance)
+
+Example:
+- P-value = 0.001 (Very significant statistically!)
+- Cohen's d = 0.05 (But the actual difference is tiny)
+
+This happens with LARGE samples! 💡
+""")
+
+# Calculate Cohen's d
+pooled_std = np.sqrt(((len(drug_group) - 1) * np.std(drug_group, ddof=1) ** 2 + 
+                      (len(placebo_group) - 1) * np.std(placebo_group, ddof=1) ** 2) / 
+                     (len(drug_group) + len(placebo_group) - 2))
+
+cohens_d = (np.mean(drug_group) - np.mean(placebo_group)) / pooled_std
+
+print(f"\n📊 Effect Size (Cohen's d): {cohens_d:.4f}")
+
+if abs(cohens_d) < 2:
+   effect_interpretation = 'Small effect!'
+elif abs(cohens_d) < 0.5:
+   effect_interpretation = 'Small to medium effect'
+elif abs(cohens_d) < 0.8:
+   effect_interpretation = 'Medium effect'
+else:
+   effect_interpretation = 'Large effect'
+
+print(f"   Interpretation: {effect_interpretation}")
+
+print(f"""
+Remember:
+- Cohen's d = 0.2  → Small but real difference
+- Cohen's d = 0.5  → Medium difference
+- Cohen's d = 0.8  → Large difference
+
+Your effect size: {cohens_d:.4f} ({effect_interpretation})
+""")
+
+# ============================================================================
+# PART 9: TYPE I AND TYPE II ERRORS
+# ============================================================================
+
+print("\n" + "=" * 81)
+print("Part 9: The Two Types of Errors (Important!)")
+print("=" * 81)
+
+print("""
+🚨 TYPE I ERROR (False Positive - "Crying wolf!")
+   You claim the drug works (reject H₀)
+   But actually, it doesn't (H₀ is true)
+
+   The p-value threshold (0.05) is designed to limit this!
+   If you use p < 0.05, you have only 5% chance of Type I error
+
+🚨 TYPE II ERROR (False Negative - "Missing the wolf!")
+   You claim the drug doesn't work (fail to reject H₀)
+   But actually, it does work (H₁ is true)
+
+   This happens with small samples!
+   With n=20, you might miss a real effect
+
+---
+
+THE TRADEOFF:
+Make the threshold stricter (p < 0.01) → Reduce Type I error but increase Type II
+Make the threshold looser (p < 0.10) → Reduce Type II error but increase Type I
+
+Professional standard: p < 0.05 (good balance)
+Medical studies: p < 0.01 (stricter, more certain)
+Exploratory research: p < 0.10 (looser, find possibilities)
+""")
 
 
+# ============================================================================
+# PART 10: REAL WORLD CAUTION
+# ============================================================================
+
+print("\n" + "=" * 81)
+print("Part 10: Important Cautions (The Truth About P-Values)")
+print("=" * 81)
+
+print("""
+⚠️ COMMON MISCONCEPTIONS:
+
+1️⃣ "P-value < 0.05 means there's only 5% chance I'm wrong"
+   ❌ WRONG! It's about the probability of the DATA, not your conclusion
+
+2️⃣ "Non-significant result (p > 0.05) means the effect doesn't exist"
+   ❌ WRONG! It might exist, but you need more data to detect it
+
+3️⃣ "You should report only p-values"
+   ❌ WRONG! Always report effect size, confidence intervals, and sample size
+
+4️⃣ "The smaller the p-value, the bigger the effect"
+   ❌ WRONG! Small p-value just means the effect is real, not how big it is
+
+---
+
+✅ THE CORRECT WAY:
+
+1. Report p-value (Is it real?)
+2. Report effect size (How big is it?)
+3. Report confidence intervals (What's the range?)
+4. Report sample size (Did we have enough data?)
+5. Check assumptions (Is the test valid?)
+""")
 
 
+# ============================================================================
+# PART 11: SAVE YOUR WORK
+# ============================================================================
 
+print("\n" + "=" * 81)
+print("===Summary===")
+print("=" * 81)
 
+summary = f"""
+🎯 WHAT YOU LEARNED:
 
+1. ✅ Null Hypothesis (H₀): Assume nothing happened
+2. ✅ Alternative Hypothesis (H₁): We want to prove something happened
+3. ✅ P-Value: Probability of the data IF null is true
+4. ✅ Statistical Significance: p < 0.05 means result is real
+5. ✅ Effect Size (Cohen's d): How big is the actual difference?
+6. ✅ Type I & II Errors: False positives and false negatives
 
+---
 
+📊 YOUR TEST RESULTS:
+   T-Statistic: {t_statistic:.4f}
+   P-Value: {p_value:.6f}
+   Cohen's d: {cohens_d:.4f}
 
+   Conclusion: {"✅ Drug works!" if p_value < 0.05 else "❌ Not proven"}
 
+---
 
+🔥 NEXT CHECKPOINT:
+   Correlation & Causation
+   - Can we say drug CAUSED the improvement?
+   - Or was it just correlation?
+"""
+
+print(summary)
+
+# Save summary to file
+with open('/Users/andhar/desktop/my_garden_of_python/data_science/lesson_4_statistics/hyp_summary.txt', 'w') as f:
+    f.write(summary)
+
+print("\n✅ CHECKPOINT 2.3.2 COMPLETE!")
+print("🙏 Om Namah Shivaya 🕉️")
 
 
 
