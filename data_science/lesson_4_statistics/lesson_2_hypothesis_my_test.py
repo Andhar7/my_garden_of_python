@@ -135,8 +135,79 @@ print(f"   Mean: {np.mean(placebo_group):.2f} ")
 print(f"   Std Dev: {np.std(placebo_group):.2f} ")
 print(f"   Min:   {np.min(placebo_group):2f},  Max:  {np.max(placebo_group):.2f} ")
 
+print(f"\n The Difference in means is: {np.mean(drug_group) - np.mean(placebo_group):.2f}")
 
 
+# ============================================================================
+# PART 5: PERFORM THE T-TEST
+# ============================================================================
+
+print("\n" + "="*80)
+print("PART 5: Running the T-Test (The Statistical Test)")
+print("="*80)
+
+print("\nPerforming Independent Two-Sample T-Test...")
+
+# Perform t-test
+t_statistic, p_value = stats.ttest_ind(drug_group, placebo_group)
+
+print(f"\n📊 T-Test Results:")
+print(f"   T-Statistic: {t_statistic:.4f}")
+print(f"   P-Value: {p_value:.6f}")
+
+# ============================================================================
+# PART 6: INTERPRET THE RESULT
+# ============================================================================
+
+print("\n" + "=" * 81)
+print("Part 6: Interpretation")
+print("=" * 81)
+
+print(f"""
+🎯 KEY RESULT: p-value = {p_value:.6f}
+
+DECISION:
+""")
+
+if p_value < 0.05:
+    print(f"✅ p-value ({p_value:.6f}) < 0.05")
+    print(f"   → Result is STATISTICALLY SIGNIFICANT!")
+    print(f"   → We REJECT the null hypothesis")
+    print(f"   → The drug probably WORKS! 🎉")
+    print(f"   → There's only a {p_value * 100:.2f}% chance this is random luck")
+else:
+    print(f"❌ p-value ({p_value:.6f}) ≥ 0.05")
+    print(f"   → Result is NOT statistically significant")
+    print(f"   → We FAIL TO REJECT the null hypothesis")
+    print(f"   → We can't prove the drug works")
+    print(f"   → The difference might just be random")
+
+
+# ============================================================================
+# PART 7: VISUALIZE THE T-TEST
+# ============================================================================
+
+print("\n" + "=" * 81)
+print("Part 7: Creating Visualization")
+print("=" * 81)
+
+plt.figure(figsize=(14, 6))
+
+# Plot 1: Box plot comparison
+plt.subplot(1, 2, 1)
+plt.boxplot([drug_group, placebo_group], label=['Drug', 'Placebo'])
+plt.ylabel('Mood Improvement Score')
+plt.title('Drug vs Placebo: Box Plot Comparison')
+plt.grid(True, alpha=0.3)
+
+# Plot 2: Distributions with means
+# plt.subplot(1, 2, 2)
+
+
+plt.tight_layout()
+plt.savefig('/Users/andhar/desktop/my_garden_of_python/data_science/lesson_4_statistics/hyp_1_ttest.png', dpi=150)
+print("✅ Visualization saved: hyp_1_ttest.png")
+plt.close()
 
 
 
