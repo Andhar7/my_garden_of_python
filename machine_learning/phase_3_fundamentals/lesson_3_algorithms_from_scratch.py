@@ -252,8 +252,8 @@ print(f"   Test R² Score: {test_r2:.4f}")
 print("\n\n🎯 LESSON 2: DECISION TREE FROM SCRATCH")
 print("-" * 70)
 
-X_clf, y_clf = make_classification(n_samples=100, n_features=4, n_informative=3,
-                                   n_classes=2, random_state=42)
+X_clf, y_clf = make_classification(n_samples=100, n_features=4, n_informative=2,
+                                   n_redundant=1, n_classes=2, random_state=42)
 X_clf_train, X_clf_test, y_clf_train, y_clf_test = train_test_split(
     X_clf, y_clf, test_size=0.2, random_state=42
 )
@@ -337,8 +337,8 @@ axes[1, 1].set_title('Lesson 2: Feature Importance (Split Count)', fontsize=12, 
 axes[1, 1].grid(True, alpha=0.3, axis='y')
 
 plt.tight_layout()
-plt.savefig('ml_3_from_scratch.png', dpi=300, bbox_inches='tight')
-print("\n✅ Visualization saved: ml_3_from_scratch.png")
+plt.savefig('/Users/andhar/Desktop/my_garden_of_python/machine_learning/phase_3_fundamentals/ml_3_from_scratch.png', dpi=300, bbox_inches='tight')
+print("\n✅ Visualization saved: /Users/andhar/Desktop/my_garden_of_python/machine_learning/phase_3_fundamentals/ml_3_from_scratch.png")
 
 print("\n" + "=" * 70)
 print("🔥 PHASE 3.3 LESSON 1 & 2 COMPLETE!")
